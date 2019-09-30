@@ -28,8 +28,8 @@ spec:
       serviceAccount: webhook
       containers:
         - name: webhook
-          args: ["--debug"]
           image: github.com/projectriff/no-resource-requests-webhook/cmd/webhook
+          args: ["--debug"]
           ports:
             - containerPort: 443
               name: server
