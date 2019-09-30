@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: webhook-server-cert-issuer
+  namespace: no-resource-requests
+spec:
+  selfSigned: {}
+
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: webhook-server-cert
+  namespace: no-resource-requests
+spec:
+  commonName: webhook.no-resource-requests.svc
+  dnsNames:
+  - webhook.no-resource-requests.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: webhook-server-cert-issuer
+  secretName: webhook-server-cert

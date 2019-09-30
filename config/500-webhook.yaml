@@ -1,0 +1,24 @@
+
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: no-resource-requests
+webhooks:
+- name: no-resource-requests.projectriff.io
+  namespaceSelector:
+    matchExpressions:
+    - key: no-resource-requests.projectriff.io/enabled
+      operator: NotIn
+      values:
+      - "false"
+  rules:
+  - apiGroups: [""]
+    apiVersions: ["v1"]
+    operations: ["CREATE", "UPDATE"]
+    resources: ["pods"]
+  failurePolicy: Fail
+  clientConfig:
+    service:
+      name: webhook
+      namespace: no-resource-requests
+      path: /
