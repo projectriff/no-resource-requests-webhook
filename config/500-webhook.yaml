@@ -3,7 +3,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: no-resource-requests
   annotations:
-    certmanager.k8s.io/inject-ca-from: "no-resource-requests/webhook-server-cert"
+    cert-manager.io/inject-ca-from: "no-resource-requests/webhook-server-cert"
 webhooks:
 - name: no-resource-requests.projectriff.io
   namespaceSelector:
@@ -19,7 +19,7 @@ webhooks:
     resources: ["pods"]
   failurePolicy: Fail
   clientConfig:
-    #! caBundle is injected by certmanager
+    #! caBundle is injected by cert-manager
     service:
       name: webhook
       namespace: no-resource-requests
